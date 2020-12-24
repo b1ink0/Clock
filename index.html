@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"  content="width=device-width, initial-scale=1.0">
+  <title>JS + CSS Clock</title>
+</head>
+<style>
+  *{
+    margin: 0px;
+    padding: 0px;
+  }
+  
+  body {
+    width: 100%;
+    height: 100hv;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(0, 0, 0);
+  }
+  .changeBackground{
+    color: white;
+  }
+  .border {
+    border-radius: 50%;
+    width: 400px;
+    height: 400px;
+    top: 200px;
+    position: absolute;
+    background: rgb(39, 39, 85);
+    transition: all 0.5s;
+    border: 5px white solid;
+  }
+  .change{
+    background-image: url('images/earth.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: 5px rgba(0, 0, 0, 0) solid;
+    border-radius: 50%;
+    border: 5px black solid;
+  }
+  
+  .sHead, .mHead, .hHead{
+    background: rgb(255, 255, 255);
+    width: 200px;
+    height: 5px;
+    top: 198px;
+    left: 0px;
+    position: absolute;
+    transform-origin: 100%;
+    transition: all 0.04s;
+    transform: rotate(90deg);
+    transition-timing-function: cubic-bezier(0, 2.35, 0, 1.22);
+  }
+  .c {
+    width: 20px;
+    height: 20px;
+    top: 190px;
+    position: relative;
+    background: rgb(255, 255, 255);
+    border-radius: 50%;
+    z-index: 3;
+    left: 190px;
+  }
+  .time h1{
+    top: 20px;
+    position: relative;
+    text-align: center;
+    font-size: 30px;
+    font-family: monospace;
+    letter-spacing: 6px;
+    transition: all 0.5s;
+  }
+  
+  @media only screen and (max-width: 900px) {
+    .border{
+      transform: scale(0.9);
+    }
+  }
+  @media only screen and (max-width: 412px) {
+    .border{
+      transform: scale(0.7);
+    }
+  }
+  
+</style>
+<body>
+  <div class="time">
+    <h1></h1>
+  </div>
+ 
+  <div class="border">
+    <div class="c"></div>
+    <div class="sHead s"></div>
+    <div class="mHead m"></div>
+    <div class="hHead h"></div>
+  </div>
+  
+<script >
+  const change = document.querySelector(".border");
+  const sHand = document.querySelector(".s");
+  const mHand = document.querySelector(".m");
+  const hHand = document.querySelector(".h");
+  const dig = document.querySelector(".time h1")
+
+  function date(){
+    //For Sec
+    const now = new Date();
+    const sec = now.getSeconds();
+    const secDeg = ((sec / 60) * 360) + 90;
+    sHand.style.transform = `rotate(${secDeg}deg)`;
+    
+    //For Min
+    const min = now.getMinutes();
+    const minDeg = ((min / 60) * 360) + 90;
+    mHand.style.transform = `rotate(${minDeg}deg)`;
+
+    //For Min
+    const hr = now.getHours();
+    const hrDeg = ((hr / 12) * 360) + 90;
+    hHand.style.transform = `rotate(${hrDeg}deg)`;
+
+    //(~_~)
+    console.log(`[${hr}:${min}:${sec}] [SecToDeg: ${secDeg}]`);
+    dig.textContent = `[${hr}:${min}:${sec}] `;  
+  }
+  change.addEventListener("click", function(){
+        change.classList.toggle("change")
+    })
+  change.addEventListener("click", function(){
+        dig.classList.toggle("changeBackground")
+    })
+  setInterval(date,1000)
+</script>
+</body>
+</html>
