@@ -1,3 +1,3 @@
 # Clock
 #JavaScript Challenge 2
-https://stupidgaming.github.io/Clock/
+https://b1ink0.github.io/Clock/
